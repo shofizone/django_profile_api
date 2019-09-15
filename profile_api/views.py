@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework import viewsets
 
 from profile_api import serializers
+from profile_api import models
 
 
 class HelloApiView(APIView):
@@ -86,7 +87,7 @@ class HelloViewSet(viewsets.ViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-    def retrieve(self,request, pk=None):
+    def retrieve(self, request, pk=None):
         """Handle getting object by its ID"""
         return Response({'http_methode': 'GET'})
 
@@ -101,3 +102,9 @@ class HelloViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         """Handle removing an object"""
         return Response({'http_methode': 'DELETE'})
+
+
+class UserProfileVIewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+
